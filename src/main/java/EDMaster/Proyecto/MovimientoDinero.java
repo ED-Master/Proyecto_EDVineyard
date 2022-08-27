@@ -5,11 +5,30 @@ public class MovimientoDinero {
 private int id;
 private  String concepto;
 private  float monto;
+private Empleado empleado;
+private Empresa empresa;
 
-    public MovimientoDinero(int id, String concepto, float monto) {
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public MovimientoDinero(int id, String concepto, float monto,Empleado empleado) {
         this.id = id;
         this.concepto = concepto;
         this.monto = monto;
+        this.empleado =empleado;
     }
 
     public String getConcepto() {
