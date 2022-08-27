@@ -19,7 +19,7 @@ public class EdVineyardApplication {
 		System.out.println(Venta.getMonto());
 
 		Perfil perf1 = new Perfil("Carlos Sepulveda", "url/tal", "3116543261");
-		Empleado emp1 = new Empleado(10287362, "carlos@yahoo.com", perf1, "Administrador");
+		Empleado emp1 = new Empleado(10287362, "carlos@yahoo.com", perf1, "Administrador", Emp1);
 		System.out.println(emp1.getPerfil().getId());
 		emp1.CambiarNombre("Camilo Sepulveda");
 		System.out.println(emp1.getEmail());
@@ -27,5 +27,8 @@ public class EdVineyardApplication {
 		System.out.println(emp1.getRol());
 		emp1.setRol("Operario");
 		System.out.println(emp1.toString());
+		emp1.setEmpresa(new Empresa(5678,"Otra Empresa", "2408","2453654"."cll 44 # 20 98",null,null));
+
+
 	}
 }
