@@ -20,14 +20,7 @@ public class EdVineyardApplication {
 		Emp1.setNit("8001");
 
 
-		MovimientoDinero M1=new MovimientoDinero(100000,"Compra de insumos",-200000);
-		System.out.println(M1.getMonto());
-		M1.setMonto(-250000);
 
-        MovimientoDinero Venta=new MovimientoDinero(123245,"Venta de pro",1000000);
-        Venta.setConcepto("Venta despues de Iva");
-		Venta.setMonto((float) (Venta.getMonto()*0.81));
-		System.out.println(Venta.getMonto());
 
 		Perfil perf1 = new Perfil("Carlos Sepulveda", "url/tal", "3116543261");
 		Empleado emp1 = new Empleado(10287362, "carlos@yahoo.com", perf1, "Administrador");
@@ -38,5 +31,14 @@ public class EdVineyardApplication {
 		System.out.println(emp1.getRol());
 		emp1.setRol("Operario");
 		System.out.println(emp1.toString());
+
+		MovimientoDinero M1=new MovimientoDinero(100000,"Compra de insumos",-200000,emp1);
+		System.out.println(M1.getMonto());
+		M1.setMonto(-250000);
+
+		MovimientoDinero Venta=new MovimientoDinero(123245,"Venta de pro",1000000,emp1);
+		Venta.setConcepto("Venta despues de Iva");
+		Venta.setMonto((float) (Venta.getMonto()*0.81));
+		System.out.println(Venta.getMonto());
 	}
 }
