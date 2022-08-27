@@ -7,13 +7,15 @@ public class Empleado {
     private int id;
     private Perfil perfil;
     private MovimientoDinero[] movimientoDineros;
-    
+    private Empresa empresa;
 
-    public Empleado(int id, String email, Perfil perfil, String rol) {
+
+    public Empleado(int id, String email, Perfil perfil, String rol,Empresa empresa) {
         this.id = id;
         this.email = email;
         this.perfil = perfil;
         this.rol = rol;
+        this.empresa = empresa;
     }
 
 
@@ -47,6 +49,18 @@ public class Empleado {
     }
     public void setRol(String rol) {
         this.rol = rol;
+    }
+
+    
+
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
 
