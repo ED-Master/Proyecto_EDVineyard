@@ -1,7 +1,7 @@
 package EDMaster.Proyecto;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //@SpringBootApplication
 public class EdVineyardApplication {
@@ -27,8 +27,9 @@ public class EdVineyardApplication {
 		emp1.setEmail("camiloSvda@gmail.com");
 		System.out.println(emp1.getRol());
 		emp1.setRol("Operario");
+		emp1.setEmpresa(new Empresa(5678,"Otra Empresa", "2408","2453654","cll 44 # 20 98",null,null));
 		System.out.println(emp1.toString());
-		emp1.setEmpresa(new Empresa(5678,"Otra Empresa", "2408","2453654"."cll 44 # 20 98",null,null));
+
 
 
 		MovimientoDinero M1=new MovimientoDinero(100000,"Compra de insumos",-200000,emp1);

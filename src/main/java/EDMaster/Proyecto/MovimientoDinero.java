@@ -46,4 +46,9 @@ private Empresa empresa;
     public void setMonto(float monto) {
         this.monto = monto;
     }
+
+    public int getId() {
+        return id;
+    }
+    
 }
