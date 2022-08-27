@@ -9,6 +9,17 @@ public class EdVineyardApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(EdVineyardApplication.class, args);
 
+		Empresa Emp1=new Empresa(1234,"EdVineyard", "9001", "0003", "Av las uvas", null, null);
+		System.out.println(Emp1.getNombre());
+		Emp1.setNombre("EDVINEYARD");
+		System.out.println(Emp1.getDireccion());
+		Emp1.setDireccion("Av Siempreviva");
+		System.out.println(Emp1.getTelefono());
+		Emp1.setTelefono("2345");
+		System.out.println(Emp1.getNit());
+		Emp1.setNit("8001");
+
+
 		MovimientoDinero M1=new MovimientoDinero(100000,"Compra de insumos",-200000);
 		System.out.println(M1.getMonto());
 		M1.setMonto(-250000);
