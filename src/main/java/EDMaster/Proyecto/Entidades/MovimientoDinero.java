@@ -1,4 +1,4 @@
-package EDMaster.Proyecto;
+package EDMaster.Proyecto.Entidades;
 
 public class MovimientoDinero {
 
@@ -6,7 +6,7 @@ private int id;
 private  String concepto;
 private  float monto;
 private Empleado empleado;
-private Empresa empresa;
+private Empresa empresa; // Eliminar atributo
 
     public Empleado getEmpleado() {
         return empleado;

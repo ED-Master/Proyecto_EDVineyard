@@ -3,6 +3,11 @@ package EDMaster.Proyecto;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import EDMaster.Proyecto.Entidades.Empleado;
+import EDMaster.Proyecto.Entidades.Empresa;
+import EDMaster.Proyecto.Entidades.MovimientoDinero;
+import EDMaster.Proyecto.Entidades.Perfil;
+
 //@SpringBootApplication
 public class EdVineyardApplication {
 

@@ -1,12 +1,14 @@
-package EDMaster.Proyecto;
+package EDMaster.Proyecto.Entidades;
+
+import java.util.ArrayList;
 
 public class Empresa {
     private int id;
     private String nombre,nit, telefono, direccion;
-    private Empleado[] empleados;
-    private MovimientoDinero[] movimientoDineros;
+    private ArrayList<Empleado> empleados;
+    private ArrayList<MovimientoDinero> movimientoDineros;
 
-    public Empresa(int id, String nombre, String nit, String telefono, String direccion, Empleado[] empleados, MovimientoDinero[] movimientoDineros) {
+    public Empresa(int id, String nombre, String nit, String telefono, String direccion, ArrayList<Empleado>  empleados, ArrayList<MovimientoDinero> movimientoDineros) {
         this.id = id;
         this.nombre = nombre;
         this.nit = nit;
@@ -56,19 +58,19 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public Empleado[] getEmpleados() {
+    public ArrayList<Empleado>  getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(Empleado[] empleados) {
+    public void setEmpleados(ArrayList<Empleado>  empleados) {
         this.empleados = empleados;
     }
 
-    public MovimientoDinero[] getMovimientoDineros() {
+    public ArrayList<MovimientoDinero> getMovimientoDineros() {
         return movimientoDineros;
     }
 
-    public void setMovimientoDineros(MovimientoDinero[] movimientoDineros) {
+    public void setMovimientoDineros(ArrayList<MovimientoDinero> movimientoDineros) {
         this.movimientoDineros = movimientoDineros;
     }
 }

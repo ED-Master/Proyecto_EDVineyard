@@ -1,4 +1,4 @@
-package EDMaster.Proyecto;
+package EDMaster.Proyecto.Entidades;
 
 
 public class Perfil{

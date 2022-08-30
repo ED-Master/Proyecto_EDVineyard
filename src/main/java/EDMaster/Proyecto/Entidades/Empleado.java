@@ -1,12 +1,13 @@
-package EDMaster.Proyecto;
+package EDMaster.Proyecto.Entidades;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Empleado {
     private String  email, rol;
     private int id;
     private Perfil perfil;
-    private MovimientoDinero[] movimientoDineros;
+    private ArrayList<MovimientoDinero> movimientoDineros;
     private Empresa empresa;
 
 
@@ -34,10 +35,10 @@ public class Empleado {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
-    public MovimientoDinero[] getMovimientoDineros() {
+    public ArrayList<MovimientoDinero> getMovimientoDineros() {
         return movimientoDineros;
     }
-    public void setMovimientoDineros(MovimientoDinero[] movimientoDineros) {
+    public void setMovimientoDineros(ArrayList<MovimientoDinero> movimientoDineros) {
         if(this.rol.equalsIgnoreCase("administrador")){
             this.movimientoDineros = movimientoDineros;
         }else{
@@ -71,8 +72,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado [email=" + email + ", id=" + id + ", movimientoDineros=" + Arrays.toString(movimientoDineros)
-                + ", " + perfil.toString() + ", rol=" + rol + "]";
+        return "Empleado [email=" + email + ", id=" + id + ", movimientoDineros=" + ", " + perfil.toString() + ", rol=" + rol + "]";
     }
 
     
