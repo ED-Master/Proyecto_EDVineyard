@@ -1,14 +1,36 @@
 package EDMaster.Proyecto.Entidades;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Empresa")
 public class Empresa {
-    private int id;
-    private String nombre,nit, telefono, direccion;
-    private ArrayList<Empleado> empleados;
+    //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column(nullable = false)
+    private String nombre, nit, telefono, direccion;
+    
+    @OneToMany(mappedBy = "empresa")
+    private List<Empleado> empleados;
+
+    //@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
     private ArrayList<MovimientoDinero> movimientoDineros;
 
-    public Empresa(int id, String nombre, String nit, String telefono, String direccion, ArrayList<Empleado>  empleados, ArrayList<MovimientoDinero> movimientoDineros) {
+
+    //Constructores
+    public Empresa(long id, String nombre, String nit, String telefono, String direccion, List<Empleado>  empleados, ArrayList<MovimientoDinero> movimientoDineros) {
         this.id = id;
         this.nombre = nombre;
         this.nit = nit;
@@ -18,7 +40,11 @@ public class Empresa {
         this.movimientoDineros = movimientoDineros;
     }
 
-    public int getId() {
+    public Empresa(){
+    }
+
+    //Getters y setters
+    public long getId() {
         return id;
     }
 
@@ -58,7 +84,7 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public ArrayList<Empleado>  getEmpleados() {
+    public List<Empleado>  getEmpleados() {
         return empleados;
     }
 

@@ -1,26 +1,64 @@
 package EDMaster.Proyecto.Entidades;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+//import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
+import EDMaster.Proyecto.Enums.EnumTipo;
+
+@Entity
+@Table(name = "Empleado")
 public class Empleado {
-    private String  email, rol;
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private long id;
+
+    @Column(unique = true, nullable =  false)
+    private String  email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EnumTipo rol;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nombre")
     private Perfil perfil;
+
+    //@OneToMany
     private ArrayList<MovimientoDinero> movimientoDineros;
+    
+    @ManyToOne
+    @JoinColumn(name = "empresaId")
     private Empresa empresa;
 
 
-    public Empleado(int id, String email, Perfil perfil, String rol,Empresa empresa) {
+    public Empleado(long id, String email, Perfil perfil, EnumTipo rol,Empresa empresa) {
         this.id = id;
         this.email = email;
         this.perfil = perfil;
         this.rol = rol;
         this.empresa = empresa;
     }
+    public Empleado(){
 
+    }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
     public String getEmail() {
@@ -39,16 +77,16 @@ public class Empleado {
         return movimientoDineros;
     }
     public void setMovimientoDineros(ArrayList<MovimientoDinero> movimientoDineros) {
-        if(this.rol.equalsIgnoreCase("administrador")){
+        if(this.rol.equals("Administrador")){
             this.movimientoDineros = movimientoDineros;
         }else{
             System.out.println("Usted no es administrador, no tienes permiso.");
         }
     }
-    public String getRol() {
+    public EnumTipo getRol() {
         return rol;
     }
-    public void setRol(String rol) {
+    public void setRol(EnumTipo rol) {
         this.rol = rol;
     }
 

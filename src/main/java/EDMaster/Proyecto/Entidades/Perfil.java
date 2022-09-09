@@ -1,9 +1,24 @@
 package EDMaster.Proyecto.Entidades;
 
+import javax.persistence.*;
 
+
+@Entity
+@Table(name = "Perfil")
 public class Perfil{
     //Atributos para la clase. El atributo user debemos saber cómo implementarlo
-    private String id, imagen, telefono; 
+    @Id
+    @Column(unique = true, nullable = false)
+    private String id;
+
+    @Column
+    private String imagen;
+
+    @Column(nullable = false)
+    private  String telefono;
+
+    //@OneToOne(mappedBy = "empleado")
+    //private Empleado empleado;
     
 
     //Constructor para la clase
@@ -11,6 +26,9 @@ public class Perfil{
         this.id = id;
         this.imagen = imagen;
         this.telefono = telefono;
+    }
+    public Perfil(){
+        
     }
 
     //Getters y setters para la clase
