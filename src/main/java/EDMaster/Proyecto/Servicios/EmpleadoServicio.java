@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
+import org.springframework.util.ReflectionUtils;
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 
 import EDMaster.Proyecto.Repositorio.EmpleadoRepositorio;
@@ -38,13 +38,13 @@ public class EmpleadoServicio {
         }
     }
 
-    public Empleado actualizarCampo(long id, Map<Objet, Objet> empleadoMapeo){
+    public Empleado actualizarCampo(long id, Map<Object, Object> empleadoMapeo){
         Empleado empleado = this.repositorio.findById(id).get();
 
         empleadoMapeo.forEach((key,Value)->{
             Field campo = ReflectionUtils.findField(Empleado.class, (String) key);
             campo.setAccessible(true);
-            ReflectionUtils.setField(campo, empleado, value);            
+            ReflectionUtils.setField(campo, empleado, Value);            
         });
         return this.repositorio.save(empleado);
     }
@@ -54,7 +54,7 @@ public class EmpleadoServicio {
             this.repositorio.deleteById(id);
             return "Se eliminó exitosamente el empleado";
         }else{
-            return "No existe un empleado con tal Id para ser eliminado",
+            return "No existe un empleado con tal Id para ser eliminado";
         }
     }
 }
