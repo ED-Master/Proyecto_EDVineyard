@@ -1,39 +1,59 @@
 package EDMaster.Proyecto.Servicios;
 
 
+import EDMaster.Proyecto.Entidades.Empresa;
 import EDMaster.Proyecto.Entidades.MovimientoDinero;
-import EDMaster.Proyecto.Repositorio.MD_Repositorios;
+import EDMaster.Proyecto.Repositorio.MovimientosRepositorio;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Set;
+
 
 @Service
 public class serviciosMD {
 
- private MD_Repositorios repositorio;
+    private EmpresaServicios empresaServicios;
+    private MovimientosRepositorio repositorio;
 
-    public serviciosMD(MD_Repositorios repositorio) {
+    public serviciosMD(MovimientosRepositorio repositorio, EmpresaServicios empresaServicios) {
         this.repositorio = repositorio;
+        this.empresaServicios = empresaServicios;
     }
 
-    public ArrayList<MovimientoDinero> ListaMovimiento(){
-        return (ArrayList<MovimientoDinero>) this.repositorio.findAll();
-
+    public Set<MovimientoDinero> ListaMovimiento(Long id){
+        Empresa emp = this.empresaServicios.buscarEmpresa(id).get();
+        return emp.getMovimientoDineros();
     }
 
 
-
-    public Optional<MovimientoDinero> BuscarP(int index) {
-        return repositorio.findById(index);
+    public MovimientoDinero BuscarP(Long id, int index) {
+        Empresa emp = this.empresaServicios.buscarEmpresa(id).get();
+        MovimientoDinero mov = null;
+        for(MovimientoDinero p: emp.getMovimientoDineros()){
+            if (p.getId() == index){
+                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado());
+                break;
+            }
+        }
+        
+        return mov;
     }
 
-    public String crearMD(MovimientoDinero x) {
-        if (repositorio.findById(x.getId()).isEmpty()){
-            repositorio.save(x);
+    public String crearMD(MovimientoDinero x, Long id) {
+        Empresa emp = this.empresaServicios.buscarEmpresa(id).get();
+        MovimientoDinero mov = null;
+        for(MovimientoDinero p: emp.getMovimientoDineros()){
+            if (p.getId() == x.getId()){
+                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado());
+                break;
+            }
+        }
+
+        if (mov == null){
+            emp.getMovimientoDineros().add(x);
             return"Se crea el movimiento exitosamente";
 
         }
@@ -42,9 +62,18 @@ public class serviciosMD {
         }
     }
 
-    public String eliminarMovimiento(int index) {
-        if (repositorio.findById(index).isPresent()){
-            repositorio.deleteById(index);
+    public String eliminarMovimiento(int index, Long id) {
+        Empresa emp = this.empresaServicios.buscarEmpresa(id).get();
+        MovimientoDinero mov = null;
+        for(MovimientoDinero p: emp.getMovimientoDineros()){
+            if (p.getId() == index){
+                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado());
+                
+            }
+        }
+
+        if (mov != null){
+            emp.getMovimientoDineros().remove(mov);
             return"Se elimina el movimiento exitosamente";
 
         }
@@ -54,6 +83,7 @@ public class serviciosMD {
 
     }
 
+    
     public MovimientoDinero actualizarMovimientos(int index, Map<Object,Object> p) {
         MovimientoDinero mov = repositorio.findById(index).get();
         p.forEach((key,value)->{
@@ -62,7 +92,7 @@ public class serviciosMD {
             ReflectionUtils.setField(campo,mov,value);
         });
         return repositorio.save(mov);
-
+        
 
     }
 }

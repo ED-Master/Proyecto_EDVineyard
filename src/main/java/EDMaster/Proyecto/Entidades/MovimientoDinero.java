@@ -1,28 +1,33 @@
 package EDMaster.Proyecto.Entidades;
 
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import javax.persistence.*;
 
-//@Entity
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 @Table(name = "MovimientoDinero")
 public class MovimientoDinero {
 
-@Id
-//@Column(unique = true, length = 30)
-//@GeneratedValue(strategy =  GenerationType.AUTO) generar automaticamente un valor
-private int id;
-//@Column(nullable = false, length = 30)
-private  String concepto;
-//@Column(nullable = false, length = 50)
-private  float monto;
-//@ManyToOne
-//JoinColumn(name = "InfEmp")
-private Empleado empleado;
-//@ManyToOne
-//JoinColumn(name = "Empre")
-private Empresa empresa;
+    @Id
+    @Column(unique = true, length = 30)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY) //generar automaticamente un valor
+    private int id;
+
+    @Column(nullable = false, length = 30)
+    private  String concepto;
+
+    @Column(nullable = false, length = 50)
+    private  float monto;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Empleado_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
+    private Empleado empleado;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Empresa_id", referencedColumnName = "id", nullable = false)
+    private Empresa empresa;
 
 
     public MovimientoDinero() {     //Constructor vacio

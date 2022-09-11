@@ -1,9 +1,7 @@
 package EDMaster.Proyecto.Entidades;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -29,10 +28,10 @@ public class Empresa {
     private String nombre, nit, telefono, direccion;
     
     @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
-    private List<Empleado> empleados;
+    private Set<Empleado> empleados;
 
-    //@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
-    private ArrayList<MovimientoDinero> movimientoDineros;
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+    private Set<MovimientoDinero> movimientoDineros;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -45,14 +44,12 @@ public class Empresa {
 
 
     //Constructores
-    public Empresa(long id, String nombre, String nit, String telefono, String direccion, List<Empleado>  empleados, ArrayList<MovimientoDinero> movimientoDineros) {
+    public Empresa(long id, String nombre, String nit, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.nit = nit;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.empleados = empleados;
-        this.movimientoDineros = movimientoDineros;
     }
 
     public Empresa(){
@@ -99,19 +96,19 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public List<Empleado>  getEmpleados() {
+    public Set<Empleado>  getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(ArrayList<Empleado>  empleados) {
+    public void setEmpleados(Set<Empleado>  empleados) {
         this.empleados = empleados;
     }
 
-    public ArrayList<MovimientoDinero> getMovimientoDineros() {
+    public Set<MovimientoDinero> getMovimientoDineros() {
         return movimientoDineros;
     }
 
-    public void setMovimientoDineros(ArrayList<MovimientoDinero> movimientoDineros) {
+    public void setMovimientoDineros(Set<MovimientoDinero> movimientoDineros) {
         this.movimientoDineros = movimientoDineros;
     }
 }

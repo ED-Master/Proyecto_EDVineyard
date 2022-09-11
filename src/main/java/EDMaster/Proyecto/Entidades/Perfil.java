@@ -17,7 +17,7 @@ public class Perfil{
     @Column(nullable = false)
     private  String telefono;
 
-    //@OneToOne(mappedBy = "empleado")
+    //@OneToOne(mappedBy = "perfil")
     //private Empleado empleado;
     
 
@@ -50,6 +50,13 @@ public class Perfil{
     public void settelefono(String telefono) {
         this.telefono = telefono;
     }
+    /*
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }*/
 
     @Override
     public String toString() {

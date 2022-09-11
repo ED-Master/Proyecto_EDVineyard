@@ -29,7 +29,7 @@ public class EmpleadoControlador {
         return this.servicios.listarEmpleados();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/user/{id}")
     public Optional<Empleado> buscarEmpleado(@PathVariable("id") Long id){
         return this.servicios.buscarEmpleado(id);       
     }
@@ -45,7 +45,7 @@ public class EmpleadoControlador {
     }
 
     @DeleteMapping("/user/{id}")
-    public String eliminarEmpleado(@PathVariable Long id){
+    public String eliminarEmpleado(@PathVariable("id") Long id){
         return this.servicios.eliminarEmpleado(id);
     }
 }

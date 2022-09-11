@@ -1,22 +1,9 @@
 package EDMaster.Proyecto.Entidades;
 
-import java.util.ArrayList;
-//import java.util.List;
+import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-//import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -41,8 +28,8 @@ public class Empleado {
     @JoinColumn(name = "nombre")
     private Perfil perfil;
 
-    //@OneToMany
-    private ArrayList<MovimientoDinero> movimientoDineros;
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
+    private Set<MovimientoDinero> movimientoDineros;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "empresaId", referencedColumnName = "id", nullable = false)
@@ -50,11 +37,15 @@ public class Empleado {
     private Empresa empresa;
 
 
-    public Empleado(long id, String email, Perfil perfil, EnumTipo rol,Empresa empresa) {
+    public Empleado(long id, String email, Perfil perfil, String rol,Empresa empresa) {
         this.id = id;
         this.email = email;
         this.perfil = perfil;
-        this.rol = rol;
+        if(rol == "Administrador"){
+            this.rol = EnumTipo.Administrador;
+        }else{
+            this.rol = EnumTipo.Operario;
+        }
         this.empresa = empresa;
     }
     public Empleado(){
@@ -76,10 +67,10 @@ public class Empleado {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
-    public ArrayList<MovimientoDinero> getMovimientoDineros() {
+    public Set<MovimientoDinero> getMovimientoDineros() {
         return movimientoDineros;
     }
-    public void setMovimientoDineros(ArrayList<MovimientoDinero> movimientoDineros) {
+    public void setMovimientoDineros(Set<MovimientoDinero> movimientoDineros) {
         if(this.rol.equals("Administrador")){
             this.movimientoDineros = movimientoDineros;
         }else{
@@ -89,8 +80,12 @@ public class Empleado {
     public EnumTipo getRol() {
         return rol;
     }
-    public void setRol(EnumTipo rol) {
-        this.rol = rol;
+    public void setRol(String rol) {
+        if(rol == "Administrador"){
+            this.rol = EnumTipo.Administrador;
+        }else{
+            this.rol = EnumTipo.Operario;
+        }
     }
 
     
