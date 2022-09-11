@@ -1,6 +1,7 @@
 package EDMaster.Proyecto.Entidades;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -11,7 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Empresa")
@@ -29,6 +33,15 @@ public class Empresa {
 
     //@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
     private ArrayList<MovimientoDinero> movimientoDineros;
+
+    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
+    private Date fecha;
+
+    @PrePersist
+    public void fechaActual(){
+        this.fecha = new Date();
+    }
 
 
     //Constructores
