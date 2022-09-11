@@ -3,10 +3,12 @@ package EDMaster.Proyecto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 /*import EDMaster.Proyecto.Entidades.Empleado;
 import EDMaster.Proyecto.Entidades.Empresa;
 import EDMaster.Proyecto.Entidades.MovimientoDinero;
 import EDMaster.Proyecto.Entidades.Perfil; */
+
 
 @SpringBootApplication
 public class EdVineyardApplication {
@@ -44,7 +46,9 @@ public class EdVineyardApplication {
 		MovimientoDinero Venta=new MovimientoDinero(123245,"Venta de pro",1000000,emp1);
 		Venta.setConcepto("Venta despues de Iva");
 		Venta.setMonto((float) (Venta.getMonto()*0.81));
+
 		System.out.println(Venta.getMonto());
-	*/
+
+		System.out.println(Venta.getMonto());*/
 	}
 }
