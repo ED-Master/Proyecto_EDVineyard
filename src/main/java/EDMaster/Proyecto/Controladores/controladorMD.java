@@ -32,7 +32,7 @@ public class controladorMD {
         return  this.servicio.crearMD(x, id);
     }
 
-    @PatchMapping("/enterprises/{id}/movements")
+    @PatchMapping("/enterprises/movements/{id}")
     public MovimientoDinero actualizarMovimientos(@PathVariable("id")int id, @RequestBody Map<Object,Object> p){
         return  this.servicio.actualizarMovimientos(id,p);
     }

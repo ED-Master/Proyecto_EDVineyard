@@ -30,13 +30,14 @@ public class EmpleadoServicio {
     }
 
     public String crearEmpleado(Empleado empleado){
-        if (this.repositorio.findById(empleado.getId()).isEmpty()){
+        if (empleado.getId() == null || !this.repositorio.existsById(empleado.getId())){
             this.repositorio.save(empleado);
             return "Se crea el empleado exitosamente";             
         }else{
             return "Ya existe un empleado con ese Id";    
         }
     }
+    
 
     public Empleado actualizarCampo(long id, Map<Object, Object> empleadoMapeo){
         Empleado empleado = this.repositorio.findById(id).get();

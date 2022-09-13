@@ -35,7 +35,7 @@ public class EmpresaControlador {
 
     @PatchMapping("/enterprises/{id}")
     public Empresa actualizarCampo(@PathVariable("id") Long id, @RequestBody Map<Object,Object> mapeoEmp){
-        return this.actualizarCampo(id, mapeoEmp);
+        return this.servicios.actualizarCampo(id, mapeoEmp);
     }
 
     @DeleteMapping("enterprises/{id}")

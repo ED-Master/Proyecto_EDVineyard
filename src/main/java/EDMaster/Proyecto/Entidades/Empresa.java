@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Empresa")
 public class Empresa {
@@ -24,17 +26,18 @@ public class Empresa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column
     private String nombre, nit, telefono, direccion;
     
     @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Empleado> empleados;
 
     @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<MovimientoDinero> movimientoDineros;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
     private Date fecha;
 
     @PrePersist

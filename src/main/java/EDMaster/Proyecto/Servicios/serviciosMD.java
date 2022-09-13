@@ -34,7 +34,7 @@ public class serviciosMD {
         MovimientoDinero mov = null;
         for(MovimientoDinero p: emp.getMovimientoDineros()){
             if (p.getId() == index){
-                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado());
+                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado(), emp);
                 break;
             }
         }
@@ -42,24 +42,14 @@ public class serviciosMD {
         return mov;
     }
 
-    public String crearMD(MovimientoDinero x, Long id) {
+    public String crearMD(MovimientoDinero movimiento, Long id) {
         Empresa emp = this.empresaServicios.buscarEmpresa(id).get();
-        MovimientoDinero mov = null;
-        for(MovimientoDinero p: emp.getMovimientoDineros()){
-            if (p.getId() == x.getId()){
-                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado());
-                break;
-            }
-        }
+        
+        movimiento.setEmpresa(emp);
 
-        if (mov == null){
-            emp.getMovimientoDineros().add(x);
-            return"Se crea el movimiento exitosamente";
+        this.repositorio.save(movimiento);
 
-        }
-        else{
-            return"No se creo el movimiento";
-        }
+        return "Se creó el movimiento";
     }
 
     public String eliminarMovimiento(int index, Long id) {
@@ -67,13 +57,14 @@ public class serviciosMD {
         MovimientoDinero mov = null;
         for(MovimientoDinero p: emp.getMovimientoDineros()){
             if (p.getId() == index){
-                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado());
+                mov = new MovimientoDinero(p.getId(), p.getConcepto(), p.getMonto(), p.getEmpleado(), emp);
                 
             }
         }
 
         if (mov != null){
             emp.getMovimientoDineros().remove(mov);
+            this.repositorio.deleteById(index);
             return"Se elimina el movimiento exitosamente";
 
         }

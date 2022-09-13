@@ -22,17 +22,18 @@ public class MovimientoDinero {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Empleado_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Empleado empleado;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "Empresa_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Empresa empresa;
 
 
     public MovimientoDinero() {     //Constructor vacio
     }
 
+    
     public Empleado getEmpleado() {
         return empleado;
     }
@@ -49,11 +50,12 @@ public class MovimientoDinero {
         this.empresa = empresa;
     }
 
-    public MovimientoDinero(int id, String concepto, float monto,Empleado empleado) { //Constructor
+    public MovimientoDinero(int id, String concepto, float monto,Empleado empleado, Empresa empresa) { //Constructor
         this.id = id;
         this.concepto = concepto;
         this.monto = monto;
         this.empleado =empleado;
+        this.empresa = empresa;
     }
 
     public String getConcepto() {

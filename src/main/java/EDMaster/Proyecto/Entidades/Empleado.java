@@ -14,8 +14,8 @@ import EDMaster.Proyecto.Enums.EnumTipo;
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private long id;
+    //@Column(nullable = false)
+    private Long id;
 
     @Column(unique = true, nullable =  false)
     private String  email;
@@ -29,15 +29,15 @@ public class Empleado {
     private Perfil perfil;
 
     @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<MovimientoDinero> movimientoDineros;
     
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "empresaId", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Empresa empresa;
 
 
-    public Empleado(long id, String email, Perfil perfil, String rol,Empresa empresa) {
+    public Empleado(Long id, String email, Perfil perfil, String rol,Empresa empresa) {
         this.id = id;
         this.email = email;
         this.perfil = perfil;
@@ -52,7 +52,7 @@ public class Empleado {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     public String getEmail() {
@@ -89,7 +89,6 @@ public class Empleado {
     }
 
     
-
 
     public Empresa getEmpresa() {
         return empresa;
