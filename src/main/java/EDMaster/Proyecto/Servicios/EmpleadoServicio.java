@@ -51,7 +51,7 @@ public class EmpleadoServicio {
     }
 
     public String eliminarEmpleado(long id){
-        if (this.repositorio.findById(id).isPresent()){
+        if (this.repositorio.existsById(id)){
             this.repositorio.deleteById(id);
             return "Se eliminó exitosamente el empleado";
         }else{
