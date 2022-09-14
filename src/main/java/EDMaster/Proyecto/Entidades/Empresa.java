@@ -1,24 +1,65 @@
 package EDMaster.Proyecto.Entidades;
 
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = "Empresa")
 public class Empresa {
-    private int id;
-    private String nombre,nit, telefono, direccion;
-    private ArrayList<Empleado> empleados;
-    private ArrayList<MovimientoDinero> movimientoDineros;
+    //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public Empresa(int id, String nombre, String nit, String telefono, String direccion, ArrayList<Empleado>  empleados, ArrayList<MovimientoDinero> movimientoDineros) {
+    @Column
+    private String nombre, nit, telefono, direccion;
+    
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Empleado> empleados;
+
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<MovimientoDinero> movimientoDineros;
+
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+
+    @PrePersist
+    public void fechaActual(){
+        this.fecha = new Date();
+    }
+
+
+    //Constructores
+    public Empresa(long id, String nombre, String nit, String telefono, String direccion) {
         this.id = id;
         this.nombre = nombre;
         this.nit = nit;
         this.telefono = telefono;
         this.direccion = direccion;
-        this.empleados = empleados;
-        this.movimientoDineros = movimientoDineros;
     }
 
-    public int getId() {
+    public Empresa(){
+    }
+
+    //Getters y setters
+    public long getId() {
         return id;
     }
 
@@ -58,19 +99,19 @@ public class Empresa {
         this.direccion = direccion;
     }
 
-    public ArrayList<Empleado>  getEmpleados() {
+    public Set<Empleado>  getEmpleados() {
         return empleados;
     }
 
-    public void setEmpleados(ArrayList<Empleado>  empleados) {
+    public void setEmpleados(Set<Empleado>  empleados) {
         this.empleados = empleados;
     }
 
-    public ArrayList<MovimientoDinero> getMovimientoDineros() {
+    public Set<MovimientoDinero> getMovimientoDineros() {
         return movimientoDineros;
     }
 
-    public void setMovimientoDineros(ArrayList<MovimientoDinero> movimientoDineros) {
+    public void setMovimientoDineros(Set<MovimientoDinero> movimientoDineros) {
         this.movimientoDineros = movimientoDineros;
     }
 }

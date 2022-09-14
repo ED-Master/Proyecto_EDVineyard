@@ -1,26 +1,58 @@
 package EDMaster.Proyecto.Entidades;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Set;
 
+import javax.persistence.*;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import EDMaster.Proyecto.Enums.EnumTipo;
+
+@Entity
+@Table(name = "Empleado")
 public class Empleado {
-    private String  email, rol;
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Column(nullable = false)
+    private Long id;
+
+    @Column(unique = true, nullable =  false)
+    private String  email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EnumTipo rol;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "nombre")
     private Perfil perfil;
-    private ArrayList<MovimientoDinero> movimientoDineros;
+
+    @OneToMany(mappedBy = "empleado", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<MovimientoDinero> movimientoDineros;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "empresaId", referencedColumnName = "id", nullable = false)
     private Empresa empresa;
 
 
-    public Empleado(int id, String email, Perfil perfil, String rol,Empresa empresa) {
+    public Empleado(Long id, String email, Perfil perfil, String rol,Empresa empresa) {
         this.id = id;
         this.email = email;
         this.perfil = perfil;
-        this.rol = rol;
+        if(rol == "Administrador"){
+            this.rol = EnumTipo.Administrador;
+        }else{
+            this.rol = EnumTipo.Operario;
+        }
         this.empresa = empresa;
     }
+    public Empleado(){
 
+    }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
     public String getEmail() {
@@ -35,25 +67,28 @@ public class Empleado {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
-    public ArrayList<MovimientoDinero> getMovimientoDineros() {
+    public Set<MovimientoDinero> getMovimientoDineros() {
         return movimientoDineros;
     }
-    public void setMovimientoDineros(ArrayList<MovimientoDinero> movimientoDineros) {
-        if(this.rol.equalsIgnoreCase("administrador")){
+    public void setMovimientoDineros(Set<MovimientoDinero> movimientoDineros) {
+        if(this.rol.equals("Administrador")){
             this.movimientoDineros = movimientoDineros;
         }else{
             System.out.println("Usted no es administrador, no tienes permiso.");
         }
     }
-    public String getRol() {
+    public EnumTipo getRol() {
         return rol;
     }
     public void setRol(String rol) {
-        this.rol = rol;
+        if(rol == "Administrador"){
+            this.rol = EnumTipo.Administrador;
+        }else{
+            this.rol = EnumTipo.Operario;
+        }
     }
 
     
-
 
     public Empresa getEmpresa() {
         return empresa;

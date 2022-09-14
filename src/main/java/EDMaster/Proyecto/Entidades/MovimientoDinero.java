@@ -1,13 +1,39 @@
 package EDMaster.Proyecto.Entidades;
 
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = "MovimientoDinero")
 public class MovimientoDinero {
 
-private int id;
-private  String concepto;
-private  float monto;
-private Empleado empleado;
-private Empresa empresa; // Eliminar atributo
+    @Id
+    @Column(unique = true, length = 30)
+    @GeneratedValue(strategy =  GenerationType.IDENTITY) //generar automaticamente un valor
+    private int id;
 
+    @Column(nullable = false, length = 30)
+    private  String concepto;
+
+    @Column(nullable = false, length = 50)
+    private  float monto;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Empleado_id", referencedColumnName = "id", nullable = false)
+    private Empleado empleado;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Empresa_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
+    private Empresa empresa;
+
+
+    public MovimientoDinero() {     //Constructor vacio
+    }
+
+    
     public Empleado getEmpleado() {
         return empleado;
     }
@@ -24,11 +50,12 @@ private Empresa empresa; // Eliminar atributo
         this.empresa = empresa;
     }
 
-    public MovimientoDinero(int id, String concepto, float monto,Empleado empleado) {
+    public MovimientoDinero(int id, String concepto, float monto,Empleado empleado, Empresa empresa) { //Constructor
         this.id = id;
         this.concepto = concepto;
         this.monto = monto;
         this.empleado =empleado;
+        this.empresa = empresa;
     }
 
     public String getConcepto() {
@@ -47,8 +74,19 @@ private Empresa empresa; // Eliminar atributo
         this.monto = monto;
     }
 
+
     public int getId() {
         return id;
     }
-    
+
+    @Override
+    public String toString() {
+        return "MovimientoDinero{" +
+                "id=" + id +
+                ", concepto='" + concepto + '\'' +
+                ", monto=" + monto +
+                ", empleado=" + empleado +
+                ", empresa=" + empresa +
+                '}';
+    }
 }

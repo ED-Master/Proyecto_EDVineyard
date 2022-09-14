@@ -1,20 +1,22 @@
 package EDMaster.Proyecto;
 
-//import org.springframework.boot.SpringApplication;
-//import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import EDMaster.Proyecto.Entidades.Empleado;
+
+/*import EDMaster.Proyecto.Entidades.Empleado;
 import EDMaster.Proyecto.Entidades.Empresa;
 import EDMaster.Proyecto.Entidades.MovimientoDinero;
-import EDMaster.Proyecto.Entidades.Perfil;
+import EDMaster.Proyecto.Entidades.Perfil; */
 
-//@SpringBootApplication
+
+@SpringBootApplication
 public class EdVineyardApplication {
 
 	public static void main(String[] args) {
-		//SpringApplication.run(EdVineyardApplication.class, args);
+		SpringApplication.run(EdVineyardApplication.class, args);
 
-		Empresa Emp1=new Empresa(1234,"EdVineyard", "9001", "0003", "Av las uvas", null, null);
+		/*Empresa Emp1=new Empresa(1234,"EdVineyard", "9001", "0003", "Av las uvas", null, null);
 		System.out.println(Emp1.getNombre());
 		Emp1.setNombre("EDVINEYARD");
 		System.out.println(Emp1.getDireccion());
@@ -44,7 +46,9 @@ public class EdVineyardApplication {
 		MovimientoDinero Venta=new MovimientoDinero(123245,"Venta de pro",1000000,emp1);
 		Venta.setConcepto("Venta despues de Iva");
 		Venta.setMonto((float) (Venta.getMonto()*0.81));
+
 		System.out.println(Venta.getMonto());
 
+		System.out.println(Venta.getMonto());*/
 	}
 }
