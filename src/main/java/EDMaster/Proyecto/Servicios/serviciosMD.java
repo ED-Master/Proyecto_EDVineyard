@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
+//import java.util.Set;
 
 
 @Service
@@ -23,9 +24,24 @@ public class serviciosMD {
         this.empresaServicios = empresaServicios;
     }
 
-    public Set<MovimientoDinero> ListaMovimiento(Long id){
+    /*public Set<MovimientoDinero> ListaMovimiento(Long id){
         Empresa emp = this.empresaServicios.buscarEmpresa(id).get();
         return emp.getMovimientoDineros();
+    }*/
+
+    public List<MovimientoDinero> ListaMovimientos(Long id){
+        Empresa emp = this.empresaServicios.buscarEmpresa(id).get();
+        return (List<MovimientoDinero>) emp.getMovimientoDineros();
+    }
+
+    public Float totalAcum(Long id){
+        Empresa empresa = this.empresaServicios.buscarEmpresa(id).get();
+        float acum = 0;
+        for(MovimientoDinero mov: empresa.getMovimientoDineros()){
+            acum += mov.getMonto();
+        }
+
+        return acum;
     }
 
 
@@ -85,5 +101,15 @@ public class serviciosMD {
         return repositorio.save(mov);
         
 
+    }
+
+    public MovimientoDinero actualizarMov(int id, MovimientoDinero mov){
+        MovimientoDinero movimientoDinero = BuscarP((long)1,id);
+
+        movimientoDinero.setConcepto(mov.getConcepto());
+        movimientoDinero.setMonto(mov.getMonto());
+        movimientoDinero.setEmpleado(mov.getEmpleado());
+
+        return repositorio.save(movimientoDinero);
     }
 }

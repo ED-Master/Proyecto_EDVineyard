@@ -27,6 +27,11 @@ public class EmpresaServicios {
         return this.repositorio.findById(id);
     }
 
+    public Empresa buscarEmpresa1(Long id){    
+        return this.repositorio.findById(id).get();
+    }
+
+
     public String crearEmpresa(Empresa empresa){
         if(this.repositorio.findById(empresa.getId()).isEmpty()){
             this.repositorio.save(empresa);
@@ -57,4 +62,13 @@ public class EmpresaServicios {
         }
     }
 
+    public Empresa actualizarEmp(Long id, Empresa empresa){
+        Empresa emp = buscarEmpresa1(id);
+        emp.setDireccion(empresa.getDireccion());
+        emp.setNit(empresa.getNit());
+        emp.setNombre(empresa.getNombre());
+        emp.setTelefono(empresa.getTelefono());
+
+        return repositorio.save(emp);
+    }
 }

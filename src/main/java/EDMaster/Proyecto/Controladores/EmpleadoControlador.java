@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import EDMaster.Proyecto.Entidades.Empleado;
@@ -25,8 +26,8 @@ public class EmpleadoControlador {
         this.servicios = servicios;        
     }
 
-    @GetMapping("/users")
-    public ArrayList<Empleado> listarEmpleados(){
+    @GetMapping("/userss")
+    public List<Empleado> listarEmpleados(){
         return this.servicios.listarEmpleados();
     }
 

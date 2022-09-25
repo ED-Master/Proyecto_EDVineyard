@@ -6,9 +6,9 @@ import EDMaster.Proyecto.Servicios.serviciosMD;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Set;
+//import java.util.Set;
 
-@RestController
+//@RestController
 public class controladorMD {
 
     private serviciosMD servicio;
@@ -16,11 +16,11 @@ public class controladorMD {
     public controladorMD(serviciosMD servicio) {
         this.servicio = servicio;
     }
-
-    @GetMapping("/enterprises/{id}/movements")
+    
+    /*@GetMapping("/enterprises/{id}/movements")
     public Set<MovimientoDinero> ListaMD(@PathVariable("id") Long id){
         return this.servicio.ListaMovimiento(id);
-    }
+    }*/
     
     @GetMapping("/enterprises/{id}/movements/{index}")
     public MovimientoDinero ConsultarMD(@PathVariable("id") Long id, @PathVariable("index") Integer index){
@@ -43,5 +43,5 @@ public class controladorMD {
     }
 
    
-
+    
 }

@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import EDMaster.Proyecto.Enums.EnumTipo;
 
 @Entity
 @Table(name = "Empleado")
@@ -20,9 +19,8 @@ public class Empleado {
     @Column(unique = true, nullable =  false)
     private String  email;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private EnumTipo rol;
+    private String rol;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "nombre")
@@ -41,11 +39,7 @@ public class Empleado {
         this.id = id;
         this.email = email;
         this.perfil = perfil;
-        if(rol == "Administrador"){
-            this.rol = EnumTipo.Administrador;
-        }else{
-            this.rol = EnumTipo.Operario;
-        }
+        this.rol = rol;
         this.empresa = empresa;
     }
     public Empleado(){
@@ -77,15 +71,11 @@ public class Empleado {
             System.out.println("Usted no es administrador, no tienes permiso.");
         }
     }
-    public EnumTipo getRol() {
+    public String getRol() {
         return rol;
     }
     public void setRol(String rol) {
-        if(rol == "Administrador"){
-            this.rol = EnumTipo.Administrador;
-        }else{
-            this.rol = EnumTipo.Operario;
-        }
+        this.rol = rol;
     }
 
     
