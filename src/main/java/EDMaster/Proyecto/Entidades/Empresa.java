@@ -1,6 +1,7 @@
 package EDMaster.Proyecto.Entidades;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -35,7 +35,7 @@ public class Empresa {
 
     @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<MovimientoDinero> movimientoDineros;
+    private List<MovimientoDinero> movimientoDineros;
 
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -107,11 +107,11 @@ public class Empresa {
         this.empleados = empleados;
     }
 
-    public Set<MovimientoDinero> getMovimientoDineros() {
+    public List<MovimientoDinero> getMovimientoDineros() {
         return movimientoDineros;
     }
 
-    public void setMovimientoDineros(Set<MovimientoDinero> movimientoDineros) {
-        this.movimientoDineros = movimientoDineros;
+    public void setMovimientoDineros(List<MovimientoDinero> movimientoDineros) {
+        this.movimientoDineros =  movimientoDineros;
     }
 }

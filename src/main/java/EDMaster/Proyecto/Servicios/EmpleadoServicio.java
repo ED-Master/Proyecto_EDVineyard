@@ -1,7 +1,8 @@
 package EDMaster.Proyecto.Servicios;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,12 +22,16 @@ public class EmpleadoServicio {
         this.repositorio = repositorio;    
     }
 
-    public ArrayList<Empleado> listarEmpleados(){
-        return (ArrayList<Empleado>) this.repositorio.findAll();
+    public List<Empleado> listarEmpleados(){
+        return  this.repositorio.findAll();
     }
 
     public Optional<Empleado> buscarEmpleado(long id){
         return this.repositorio.findById(id);
+    }
+
+    public Empleado buscarEmpleado1(long id){
+        return this.repositorio.findById(id).get();
     }
 
     public String crearEmpleado(Empleado empleado){
@@ -59,5 +64,15 @@ public class EmpleadoServicio {
         }
     }
 
+
+    public Empleado actualizarEmpl(long id, Empleado empleado){
+        Empleado emp = buscarEmpleado1(id);
+
+        emp.getPerfil().setTelefono(empleado.getPerfil().getTelefono());
+        emp.setEmail(empleado.getEmail());
+        emp.setRol(empleado.getRol());
+
+        return repositorio.save(emp);
+    }
 }
 

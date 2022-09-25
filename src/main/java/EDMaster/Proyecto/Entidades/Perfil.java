@@ -22,9 +22,9 @@ public class Perfil{
     
 
     //Constructor para la clase
-    public Perfil(String id, String imagen, String telefono) {
+    public Perfil(String id, String telefono) {
         this.id = id;
-        this.imagen = imagen;
+        this.imagen = "0";
         this.telefono = telefono;
     }
     public Perfil(){
@@ -44,10 +44,10 @@ public class Perfil{
     public void setimagen(String imagen) {
         this.imagen = imagen;
     }
-    public String gettelefono() {
+    public String getTelefono() {
         return telefono;
     }
-    public void settelefono(String telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     /*

@@ -18,7 +18,7 @@ public class EmpresaControlador {
     }
 
 
-    @GetMapping("/enterprises")
+    @GetMapping("/enterprisess")
     public ArrayList<Empresa> listarEmpresas(){
         return this.servicios.listarEmpresas();
     }
