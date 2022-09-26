@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"></html>>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,42 +11,27 @@
         <link th:href="@{../css/index.css}" rel="stylesheet">
     </head>
     <body>
-        <!--Estas son pruebas únicamente-->
+        
         
         <header>
             <div class="container">
                 <h3>ED VINEYARD</h3>
-                <nav>
-                    <a href="/">Home</a>
-                    <a href="/enterprises/movements">Ingresos y egresos</a>
-                    <a href="/users">Usuarios</a>
-                    <a href="/enterprises">Empresas aliadas</a>
-                </nav>
+                <p>GESTIÓN DE LA EMPRESA</p>
             </div>
         </header>
 
-        <section id="opciones">
-            <div class="imagen"></div>
-            <div class="container">
-                <div class="opc-cartas">
-                        <div class="carta">
-                        <h3>Ingresos-Egresos</h3>
-                        <p>En este espacio podrás acceder a consultar, modificar, eliminar o agregar movimientos de dinero a la empresa.</p>
-                        <a href="/enterprises/movements"><button>+ Info</button></a>
-                    </div>
-                    <div class="carta">
-                        <h3>Usuarios</h3>
-                        <p>En este espacio podrás acceder a consultar, modificar, eliminar o agregar empleados a la empresa.</p>
-                        <a href="/users"><button>+ Info</button></a>
-                        
-                    </div>
-                    <div class="carta">
-                        <h3>Alianzas</h3>
-                        <p>En este espacio podrás gestionar las empresas con las cuales tenemos convenios dentro de nuestra organización.</p>
-                        <a href="/enterprises"><button>+ Info</button></a>
-                    </div>
+        <section id="registro">
+            <div class="container">  
+                <h2>Bienvenido</h2>
+                <div sec:authorize="!isAuthenticated()">
+                    <p>Acá podrás gestionar la empresa de una manera más óptima</p>
+                    <a th:href="@{/oauth2/authorization/auth0}"><button>Registrase</button></a>
                 </div>
-                
+                <div sec:authorize="isAuthenticated()">
+                    <!-- <h3 th:text="'Bienvenido, ' + ${usuario.getEmail}"></h3> -->
+                    <h6 th:text="${usuario.getNombre()}" id="email"></h6>
+                    <a th:href="@{/home}"><button>Ingresar</button></a>
+                </div>
             </div>
         </section>
 

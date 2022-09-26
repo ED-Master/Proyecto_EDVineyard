@@ -3,6 +3,8 @@ package EDMaster.Proyecto.Controladores;
 import java.util.List;
 //import java.util.Set;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +16,10 @@ import EDMaster.Proyecto.Entidades.Empleado;
 import EDMaster.Proyecto.Entidades.Empresa;
 import EDMaster.Proyecto.Entidades.MovimientoDinero;
 import EDMaster.Proyecto.Entidades.Perfil;
+import EDMaster.Proyecto.Entidades.Usuarios;
 import EDMaster.Proyecto.Servicios.EmpleadoServicio;
 import EDMaster.Proyecto.Servicios.EmpresaServicios;
+import EDMaster.Proyecto.Servicios.UserServicio;
 import EDMaster.Proyecto.Servicios.serviciosMD;
 
 
@@ -25,19 +29,31 @@ public class vistaControlador {
     private serviciosMD serviciosMD;
     private EmpleadoServicio servicioEmpleado;
     private EmpresaServicios servicioEmpresa;
+    private UserServicio sercivioUsuario;
 
     
-    
     public vistaControlador(EDMaster.Proyecto.Servicios.serviciosMD serviciosMD, EmpleadoServicio servicioEmpleado,
-            EmpresaServicios servicioEmpresa) {
+            EmpresaServicios servicioEmpresa, UserServicio sercivioUsuario) {
         this.serviciosMD = serviciosMD;
         this.servicioEmpleado = servicioEmpleado;
         this.servicioEmpresa = servicioEmpresa;
+        this.sercivioUsuario = sercivioUsuario;
     }
 
     @GetMapping("/")
-    public String principal(){
+    public String principal(Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Usuarios usuario = this.sercivioUsuario.mapeoUsuario(principal.getClaims());
+            model.addAttribute("usuario", usuario);
+        }
         return "index";
+    }
+
+
+
+    @GetMapping("/home")
+    public String home(){
+        return "home";
     }
 
     // ---------------------------------------- M O V I M I E N T O S ----------------------------------------
