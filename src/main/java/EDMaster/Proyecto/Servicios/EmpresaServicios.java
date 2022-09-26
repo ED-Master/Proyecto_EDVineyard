@@ -2,6 +2,7 @@ package EDMaster.Proyecto.Servicios;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,6 +22,10 @@ public class EmpresaServicios {
 
     public ArrayList<Empresa> listarEmpresas(){
         return (ArrayList<Empresa>) this.repositorio.findAll();
+    }
+
+    public List<Empresa> listarEmpresa1(){
+        return this.repositorio.findAll();
     }
 
     public Optional<Empresa> buscarEmpresa(Long id){    

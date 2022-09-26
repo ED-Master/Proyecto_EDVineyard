@@ -166,7 +166,7 @@ public class vistaControlador {
     // --------------------------------------------- E M P R E S A S -----------------------------------------
     @GetMapping("/enterprises")
     public String listaEmpresas(Model model){
-        List<Empresa> lista = this.servicioEmpresa.listarEmpresas();
+        List<Empresa> lista = this.servicioEmpresa.listarEmpresa1();
         model.addAttribute("lista", lista);
 
         return "/empresas";
